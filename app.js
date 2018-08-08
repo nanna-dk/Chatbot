@@ -811,6 +811,9 @@ function receivedPostback(event) {
 	var payload = event.postback.payload;
 
 	switch (payload) {
+        case 'GET_STARTED':
+            greetUserText(senderID);
+            break;
         case 'JOB_APPLY':
             //get feedback with new jobs
 			sendToDialogFlow(senderID, 'job openings');
@@ -829,6 +832,36 @@ function receivedPostback(event) {
 	console.log("Received postback for user %d and page %d with payload '%s' " +
 		"at %d", senderID, recipientID, payload, timeOfPostback);
 
+}
+
+
+function greetUserText(userId) {
+    //first read user firstname
+    request({
+        uri: 'https://graph.facebook.com/v2.7/' + userId,
+        qs: {
+            access_token: config.FB_PAGE_TOKEN
+        }
+
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+
+            var user = JSON.parse(body);
+
+            if (user.first_name) {
+                console.log("FB user: %s %s, %s",
+                    user.first_name, user.last_name, user.gender);
+
+                sendTextMessage(userId, "Welcome " + user.first_name + '!');
+            } else {
+                console.log("Cannot get data for fb user with id",
+                    userId);
+            }
+        } else {
+            console.error(response.error);
+        }
+
+    });
 }
 
 
