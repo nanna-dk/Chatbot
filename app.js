@@ -423,6 +423,28 @@ async function greetUserText(userId) {
         'and I perform job interviews. What can I help you with?');
 }
 
+
+
+function sendFunNewsSubscribe(userId) {
+    let responceText = "I can send you latest fun technology news, " +
+        "you'll be on top of things and you'll get some laughts. How often would you like to receive them?";
+
+    let replies = [
+        {
+            "content_type": "text",
+            "title": "Once per week",
+            "payload": "NEWS_PER_WEEK"
+        },
+        {
+            "content_type": "text",
+            "title": "Once per day",
+            "payload": "NEWS_PER_DAY"
+        }
+    ];
+
+    fbService.sendQuickReply(userId, responceText, replies);
+}
+
 /*
  * Postback Event
  *
@@ -442,6 +464,9 @@ function receivedPostback(event) {
 	var payload = event.postback.payload;
 
 	switch (payload) {
+        case 'FUN_NEWS':
+            sendFunNewsSubscribe(senderID);
+            break;
         case 'GET_STARTED':
             greetUserText(senderID);
             break;
