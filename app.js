@@ -122,7 +122,7 @@ app.get('/auth/facebook/callback',
 
 
 
-
+app.set('view engine', 'ejs');
 
 
 
