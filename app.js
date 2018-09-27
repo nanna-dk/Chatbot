@@ -503,9 +503,9 @@ async function greetUserText(userId) {
     await resolveAfterXSeconds(2);
     user = usersMap.get(userId);
   }
-  fbService.sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
-    'I can answer frequently asked questions for you ' +
-    'and I perform job interviews. What can I help you with?');
+  fbService.sendTextMessage(userId, "Hej " + user.first_name + '. ' +
+    'I can answer frequently asked questions for you. ' +
+    'What can I help you with?');
 }
 
 
@@ -555,10 +555,10 @@ function receivedPostback(event) {
     case 'GET_STARTED':
       greetUserText(senderID);
       break;
-    case 'JOB_APPLY':
-      //get feedback with new jobs
-      dialogflowService.sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'JOB_OPENINGS');
-      break;
+    // case 'JOB_APPLY':
+    //   //get feedback with new jobs
+    //   dialogflowService.sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'JOB_OPENINGS');
+    //   break;
     case 'CHAT':
       //user wants to chat
       fbService.sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
