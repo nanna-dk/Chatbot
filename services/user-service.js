@@ -1,4 +1,5 @@
 'use strict';
+
 const request = require('request');
 const config = require('../config');
 const pg = require('pg');
@@ -78,7 +79,7 @@ module.exports = {
               callback([]);
             } else {
               callback(result.rows);
-            };
+            }
           });
     });
     pool.end();
