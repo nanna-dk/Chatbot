@@ -49,18 +49,15 @@ if (!config.FB_APP_SECRET) {
 if (!config.SERVER_URL) { //used for ink to static files
   throw new Error('missing SERVER_URL');
 }
-if (!config.SENGRID_API_KEY) { //sending email
-  throw new Error('missing SENGRID_API_KEY');
-}
-if (!config.EMAIL_FROM) { //sending email
-  throw new Error('missing EMAIL_FROM');
-}
-if (!config.EMAIL_TO) { //sending email
-  throw new Error('missing EMAIL_TO');
-}
-if (!config.WEATHER_API_KEY) { //weather api key
-  throw new Error('missing WEATHER_API_KEY');
-}
+// if (!config.EMAIL_FROM) { //sending email
+//   throw new Error('missing EMAIL_FROM');
+// }
+// if (!config.EMAIL_TO) { //sending email
+//   throw new Error('missing EMAIL_TO');
+// }
+// if (!config.WEATHER_API_KEY) { //weather api key
+//   throw new Error('missing WEATHER_API_KEY');
+// }
 if (!config.PG_CONFIG) { //pg config
   throw new Error('missing PG_CONFIG');
 }
@@ -336,24 +333,24 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         fbService.sendTextMessage(sender, reply);
       });
       break;
-    case "get-current-weather":
-      if (parameters.fields['geo-city'].stringValue != '') {
-
-        weatherService(function(weatherResponse) {
-          if (!weatherResponse) {
-            fbService.sendTextMessage(sender,
-              `No weather forecast available for ${parameters.fields['geo-city'].stringValue}`);
-          } else {
-            let reply = `${messages[0].text.text} ${weatherResponse}`;
-            fbService.sendTextMessage(sender, reply);
-          }
-
-
-        }, parameters.fields['geo-city'].stringValue);
-      } else {
-        fbService.sendTextMessage(sender, 'No weather forecast available');
-      }
-      break;
+    // case "get-current-weather":
+    //   if (parameters.fields['geo-city'].stringValue != '') {
+		//
+    //     weatherService(function(weatherResponse) {
+    //       if (!weatherResponse) {
+    //         fbService.sendTextMessage(sender,
+    //           `No weather forecast available for ${parameters.fields['geo-city'].stringValue}`);
+    //       } else {
+    //         let reply = `${messages[0].text.text} ${weatherResponse}`;
+    //         fbService.sendTextMessage(sender, reply);
+    //       }
+		//
+		//
+    //     }, parameters.fields['geo-city'].stringValue);
+    //   } else {
+    //     fbService.sendTextMessage(sender, 'No weather forecast available');
+    //   }
+    //   break;
     case "faq-delivery":
       fbService.handleMessages(messages, sender);
 
