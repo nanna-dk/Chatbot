@@ -8,7 +8,7 @@ module.exports = {
 
     addUser: function(callback, userId) {
         request({
-            uri: 'https://graph.facebook.com/v2.7/' + userId,
+            uri: 'https://graph.facebook.com/v3.1/' + userId,
             qs: {
                 access_token: config.FB_PAGE_TOKEN
             }
