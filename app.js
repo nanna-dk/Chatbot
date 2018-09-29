@@ -305,6 +305,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 				fbService.handleMessages(messages, sender);
 				fbService.sendTypingOn(sender);
 				//ask what user wants to do next
+				console.log("Asking a conditional question...");
 				setTimeout(function() {
 						let buttons = [
 								{
@@ -563,7 +564,7 @@ function receivedPostback(event) {
 									title:"Læs mere om hunde på google..."
 								}
 						];
-						fbService.sendButtonMessage(sender, "Klik på linket for at læse mere om hunden.", buttons);
+						fbService.sendButtonMessage(senderID, "Klik på linket for at læse mere om hunden.", buttons);
 				}, 3000)
 				break;
 				case 'ANSWER_TWO':
@@ -576,7 +577,7 @@ function receivedPostback(event) {
 									title:"Læs mere om pengesedler på google..."
 								}
 						];
-						fbService.sendButtonMessage(sender, "Klik på linket for at læse mere om hunden.", buttons);
+						fbService.sendButtonMessage(senderID, "Klik på linket for at læse mere om hunden.", buttons);
 				}, 3000)
 				break;
         case 'FUN_NEWS':
