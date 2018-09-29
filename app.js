@@ -465,9 +465,7 @@ function handleMessages(messages, sender) {
             timeout = i * timeoutInterval;
             setTimeout(handleMessage.bind(null, messages[i], sender), timeout);
         }
-
         previousType = messages[i].message;
-
     }
 }
 
@@ -564,11 +562,11 @@ function receivedPostback(event) {
 									title:"Læs mere om hunde på google..."
 								}
 						];
-						fbService.sendButtonMessage(senderID, "Klik på linket for at læse mere om hunden.", buttons);
+						fbService.sendButtonMessage(senderID, "Læs mere om hunden.", buttons);
 				}, 3000)
 				break;
 				case 'ANSWER_TWO':
-				//fbService.sendTextMessage(senderID, "Ingen penge!");
+//fbService.sendTextMessage(senderID, "Ingen penge!");
 				setTimeout(function() {
 						let buttons = [
 								{
@@ -577,7 +575,7 @@ function receivedPostback(event) {
 									title:"Læs mere om pengesedler på google..."
 								}
 						];
-						fbService.sendButtonMessage(senderID, "Klik på linket for at læse mere om hunden.", buttons);
+						fbService.sendButtonMessage(senderID, "Læs mere om penge.", buttons);
 				}, 3000)
 				break;
         case 'FUN_NEWS':
