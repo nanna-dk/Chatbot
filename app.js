@@ -301,6 +301,26 @@ function handleQuickReply(senderID, quickReply, messageId) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
 	switch (action) {
+		case "two-answers":
+				fbService.handleMessages(messages, sender);
+				fbService.sendTypingOn(sender);
+				//ask what user wants to do next
+				setTimeout(function() {
+						let buttons = [
+								{
+									type:"postback",
+									title:"Dyret",
+									payload:"ANSWER_ONE"
+								},
+								{
+										type:"postback",
+										title:"Pengesedlen",
+										payload:"ANSWER_TWO"
+								}
+						];
+						fbService.sendButtonMessage(sender, "Hvilken slags hund mener du?", buttons);
+				}, 3000)
+				break;
         case "unsubscribe":
             userService.newsletterSettings(function(updated) {
                 if (updated) {
@@ -336,24 +356,6 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 fbService.sendTextMessage(sender, reply);
             });
             break;
-        // case "get-current-weather":
-        //     if ( parameters.fields['geo-city'].stringValue!='') {
-				//
-        //         weatherService(function(weatherResponse){
-        //             if (!weatherResponse) {
-        //                 fbService.sendTextMessage(sender,
-        //                     `No weather forecast available for ${parameters.fields['geo-city'].stringValue}`);
-        //             } else {
-        //                 let reply = `${messages[0].text.text} ${weatherResponse}`;
-        //                 fbService.sendTextMessage(sender, reply);
-        //             }
-				//
-				//
-        //         }, parameters.fields['geo-city'].stringValue);
-        //     } else {
-        //         fbService.sendTextMessage(sender, 'No weather forecast available');
-        //     }
-        // 	break;
         case "faq-delivery":
             fbService.handleMessages(messages, sender);
 
@@ -381,7 +383,6 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 
                 fbService.sendButtonMessage(sender, "What would you like to do next?", buttons);
             }, 3000)
-
             break;
         case "detailed-application":
             if (fbService.isDefined(contexts[0]) &&
@@ -552,6 +553,32 @@ function receivedPostback(event) {
 	var payload = event.postback.payload;
 
 	switch (payload) {
+				case 'ANSWER_ONE':
+				//fbService.sendTextMessage(senderID, "Kæledyr forbudt!");
+				setTimeout(function() {
+						let buttons = [
+								{
+									type:"web_url",
+									url:"https://www.google.dk",
+									title:"Læs mere om hunde på google..."
+								}
+						];
+						fbService.sendButtonMessage(sender, "Klik på linket for at læse mere om hunden.", buttons);
+				}, 3000)
+				break;
+				case 'ANSWER_TWO':
+				//fbService.sendTextMessage(senderID, "Ingen penge!");
+				setTimeout(function() {
+						let buttons = [
+								{
+									type:"web_url",
+									url:"https://www.google.dk",
+									title:"Læs mere om pengesedler på google..."
+								}
+						];
+						fbService.sendButtonMessage(sender, "Klik på linket for at læse mere om hunden.", buttons);
+				}, 3000)
+				break;
         case 'FUN_NEWS':
             sendFunNewsSubscribe(senderID);
             break;
