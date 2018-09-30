@@ -322,54 +322,54 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 fbService.sendButtonMessage(sender, "What would you like to do next?", buttons);
             }, 3000)
             break;
-        case "detailed-application":
-            if (fbService.isDefined(contexts[0]) &&
-                (contexts[0].name.includes('job_application') || contexts[0].name.includes('job-application-details_dialog_context'))
-                && contexts[0].parameters) {
-                let phone_number = (fbService.isDefined(contexts[0].parameters.fields['phone-number'])
-                    && contexts[0].parameters.fields['phone-number'] != '') ? contexts[0].parameters.fields['phone-number'].stringValue : '';
-                let user_name = (fbService.isDefined(contexts[0].parameters.fields['user-name'])
-                    && contexts[0].parameters.fields['user-name'] != '') ? contexts[0].parameters.fields['user-name'].stringValue : '';
-                let previous_job = (fbService.isDefined(contexts[0].parameters.fields['previous-job'])
-                    && contexts[0].parameters.fields['previous-job'] != '') ? contexts[0].parameters.fields['previous-job'].stringValue : '';
-                let years_of_experience = (fbService.isDefined(contexts[0].parameters.fields['years-of-experience'])
-                    && contexts[0].parameters.fields['years-of-experience'] != '') ? contexts[0].parameters.fields['years-of-experience'].stringValue : '';
-                let job_vacancy = (fbService.isDefined(contexts[0].parameters.fields['job-vacancy'])
-                    && contexts[0].parameters.fields['job-vacancy'] != '') ? contexts[0].parameters.fields['job-vacancy'].stringValue : '';
-
-
-                if (phone_number == '' && user_name != '' && previous_job != '' && years_of_experience == '') {
-
-                    let replies = [
-                        {
-                            "content_type":"text",
-                            "title":"Less than 1 year",
-                            "payload":"Less than 1 year"
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"Less than 10 years",
-                            "payload":"Less than 10 years"
-                        },
-                        {
-                            "content_type":"text",
-                            "title":"More than 10 years",
-                            "payload":"More than 10 years"
-                        }
-                    ];
-                    fbService.sendQuickReply(sender, messages[0].text.text[0], replies);
-                } else if (phone_number != '' && user_name != '' && previous_job != '' && years_of_experience != ''
-                    && job_vacancy != '') {
-
-                    jobApplicationService(phone_number, user_name, previous_job, years_of_experience, job_vacancy);
-
-                    fbService.handleMessages(messages, sender);
-
-                } else {
-                    fbService.handleMessages(messages, sender);
-                }
-            }
-            break;
+        // case "detailed-application":
+        //     if (fbService.isDefined(contexts[0]) &&
+        //         (contexts[0].name.includes('job_application') || contexts[0].name.includes('job-application-details_dialog_context'))
+        //         && contexts[0].parameters) {
+        //         let phone_number = (fbService.isDefined(contexts[0].parameters.fields['phone-number'])
+        //             && contexts[0].parameters.fields['phone-number'] != '') ? contexts[0].parameters.fields['phone-number'].stringValue : '';
+        //         let user_name = (fbService.isDefined(contexts[0].parameters.fields['user-name'])
+        //             && contexts[0].parameters.fields['user-name'] != '') ? contexts[0].parameters.fields['user-name'].stringValue : '';
+        //         let previous_job = (fbService.isDefined(contexts[0].parameters.fields['previous-job'])
+        //             && contexts[0].parameters.fields['previous-job'] != '') ? contexts[0].parameters.fields['previous-job'].stringValue : '';
+        //         let years_of_experience = (fbService.isDefined(contexts[0].parameters.fields['years-of-experience'])
+        //             && contexts[0].parameters.fields['years-of-experience'] != '') ? contexts[0].parameters.fields['years-of-experience'].stringValue : '';
+        //         let job_vacancy = (fbService.isDefined(contexts[0].parameters.fields['job-vacancy'])
+        //             && contexts[0].parameters.fields['job-vacancy'] != '') ? contexts[0].parameters.fields['job-vacancy'].stringValue : '';
+				//
+				//
+        //         if (phone_number == '' && user_name != '' && previous_job != '' && years_of_experience == '') {
+				//
+        //             let replies = [
+        //                 {
+        //                     "content_type":"text",
+        //                     "title":"Less than 1 year",
+        //                     "payload":"Less than 1 year"
+        //                 },
+        //                 {
+        //                     "content_type":"text",
+        //                     "title":"Less than 10 years",
+        //                     "payload":"Less than 10 years"
+        //                 },
+        //                 {
+        //                     "content_type":"text",
+        //                     "title":"More than 10 years",
+        //                     "payload":"More than 10 years"
+        //                 }
+        //             ];
+        //             fbService.sendQuickReply(sender, messages[0].text.text[0], replies);
+        //         } else if (phone_number != '' && user_name != '' && previous_job != '' && years_of_experience != ''
+        //             && job_vacancy != '') {
+				//
+        //             jobApplicationService(phone_number, user_name, previous_job, years_of_experience, job_vacancy);
+				//
+        //             fbService.handleMessages(messages, sender);
+				//
+        //         } else {
+        //             fbService.handleMessages(messages, sender);
+        //         }
+        //     }
+        //     break;
 		default:
 			//unhandled action, just send back the text
             fbService.handleMessages(messages, sender);
