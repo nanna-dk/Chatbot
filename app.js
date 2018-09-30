@@ -15,8 +15,6 @@ const broadcast = require('./routes/broadcast');
 const webviews = require('./routes/webviews');
 
 const userService = require('./services/user-service');
-//const colors = require('./colors');
-//const jobApplicationService = require('./services/job-application-service');
 let dialogflowService = require('./services/dialogflow-service');
 const fbService = require('./services/fb-service');
 
@@ -49,18 +47,15 @@ if (!config.FB_APP_SECRET) {
 if (!config.SERVER_URL) { //used for ink to static files
 	throw new Error('missing SERVER_URL');
 }
-if (!config.SENGRID_API_KEY) { //sending email
-    throw new Error('missing SENGRID_API_KEY');
-}
-if (!config.EMAIL_FROM) { //sending email
-    throw new Error('missing EMAIL_FROM');
-}
-if (!config.EMAIL_TO) { //sending email
-    throw new Error('missing EMAIL_TO');
-}
-if (!config.WEATHER_API_KEY) { //weather api key
-    throw new Error('missing WEATHER_API_KEY');
-}
+// if (!config.SENGRID_API_KEY) { //sending email
+//     throw new Error('missing SENGRID_API_KEY');
+// }
+// if (!config.EMAIL_FROM) { //sending email
+//     throw new Error('missing EMAIL_FROM');
+// }
+// if (!config.EMAIL_TO) { //sending email
+//     throw new Error('missing EMAIL_TO');
+// }
 if (!config.PG_CONFIG) { //pg config
     throw new Error('missing PG_CONFIG');
 }
