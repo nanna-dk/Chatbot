@@ -296,7 +296,6 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 				break;
         case "faq-delivery":
             fbService.handleMessages(messages, sender);
-
             fbService.sendTypingOn(sender);
 
             //ask what user wants to do next
@@ -322,60 +321,11 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 fbService.sendButtonMessage(sender, "What would you like to do next?", buttons);
             }, 3000)
             break;
-        // case "detailed-application":
-        //     if (fbService.isDefined(contexts[0]) &&
-        //         (contexts[0].name.includes('job_application') || contexts[0].name.includes('job-application-details_dialog_context'))
-        //         && contexts[0].parameters) {
-        //         let phone_number = (fbService.isDefined(contexts[0].parameters.fields['phone-number'])
-        //             && contexts[0].parameters.fields['phone-number'] != '') ? contexts[0].parameters.fields['phone-number'].stringValue : '';
-        //         let user_name = (fbService.isDefined(contexts[0].parameters.fields['user-name'])
-        //             && contexts[0].parameters.fields['user-name'] != '') ? contexts[0].parameters.fields['user-name'].stringValue : '';
-        //         let previous_job = (fbService.isDefined(contexts[0].parameters.fields['previous-job'])
-        //             && contexts[0].parameters.fields['previous-job'] != '') ? contexts[0].parameters.fields['previous-job'].stringValue : '';
-        //         let years_of_experience = (fbService.isDefined(contexts[0].parameters.fields['years-of-experience'])
-        //             && contexts[0].parameters.fields['years-of-experience'] != '') ? contexts[0].parameters.fields['years-of-experience'].stringValue : '';
-        //         let job_vacancy = (fbService.isDefined(contexts[0].parameters.fields['job-vacancy'])
-        //             && contexts[0].parameters.fields['job-vacancy'] != '') ? contexts[0].parameters.fields['job-vacancy'].stringValue : '';
-				//
-				//
-        //         if (phone_number == '' && user_name != '' && previous_job != '' && years_of_experience == '') {
-				//
-        //             let replies = [
-        //                 {
-        //                     "content_type":"text",
-        //                     "title":"Less than 1 year",
-        //                     "payload":"Less than 1 year"
-        //                 },
-        //                 {
-        //                     "content_type":"text",
-        //                     "title":"Less than 10 years",
-        //                     "payload":"Less than 10 years"
-        //                 },
-        //                 {
-        //                     "content_type":"text",
-        //                     "title":"More than 10 years",
-        //                     "payload":"More than 10 years"
-        //                 }
-        //             ];
-        //             fbService.sendQuickReply(sender, messages[0].text.text[0], replies);
-        //         } else if (phone_number != '' && user_name != '' && previous_job != '' && years_of_experience != ''
-        //             && job_vacancy != '') {
-				//
-        //             jobApplicationService(phone_number, user_name, previous_job, years_of_experience, job_vacancy);
-				//
-        //             fbService.handleMessages(messages, sender);
-				//
-        //         } else {
-        //             fbService.handleMessages(messages, sender);
-        //         }
-        //     }
-        //     break;
 		default:
 			//unhandled action, just send back the text
             fbService.handleMessages(messages, sender);
 	}
 }
-
 
 function handleMessages(messages, sender) {
     let timeoutInterval = 1100;
@@ -422,7 +372,7 @@ function handleDialogFlowResponse(sender, response) {
         fbService.handleMessages(messages, sender);
 	} else if (responseText == '' && !fbService.isDefined(action)) {
 		//dialogflow could not evaluate input.
-        fbService.sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?");
+        fbService.sendTextMessage(sender, "Hej. Jeg er en chatbot, og klar til at besvare spørgsmål.");
 	} else if (fbService.isDefined(responseText)) {
         fbService.sendTextMessage(sender, responseText);
 	}
@@ -446,28 +396,6 @@ async function greetUserText(userId) {
     fbService.sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
         'I can answer frequently asked questions for you ' +
         'and I perform job interviews. What can I help you with?');
-}
-
-
-
-function sendFunNewsSubscribe(userId) {
-    let responceText = "I can send you latest fun technology news, " +
-        "you'll be on top of things and you'll get some laughts. How often would you like to receive them?";
-
-    let replies = [
-        {
-            "content_type": "text",
-            "title": "Once per week",
-            "payload": "NEWS_PER_WEEK"
-        },
-        {
-            "content_type": "text",
-            "title": "Once per day",
-            "payload": "NEWS_PER_DAY"
-        }
-    ];
-
-    fbService.sendQuickReply(userId, responceText, replies);
 }
 
 /*
@@ -515,9 +443,6 @@ function receivedPostback(event) {
 						fbService.sendButtonMessage(senderID, "Læs mere om penge.", buttons);
 				}, 3000)
 				break;
-        case 'FUN_NEWS':
-            sendFunNewsSubscribe(senderID);
-            break;
         case 'GET_STARTED':
             greetUserText(senderID);
             break;
