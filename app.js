@@ -361,7 +361,7 @@ async function greetUserText(userId) {
     await resolveAfterXSeconds(2);
     user = usersMap.get(userId);
   }
-  fbService.sendTextMessage(userId, "Welcome " + user.name + '! ' + 'I can answer frequently asked questions for you ' + 'and I perform job interviews. What can I help you with?');
+  fbService.sendTextMessage(userId, "Hej " + user.name + '! ' + 'Jeg kan svare på det meste - hvad kan jeg hjælpe dig med?');
 }
 
 /*
@@ -418,7 +418,8 @@ function receivedPostback(event) {
       break;
     default:
       //unindentified payload
-      fbService.sendTextMessage(senderID, ":-)");
+      //fbService.sendTextMessage(senderID, ":-)");
+      greetUserText(senderID);
       break;
   }
 
