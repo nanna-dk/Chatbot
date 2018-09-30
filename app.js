@@ -9,7 +9,7 @@ const request = require('request');
 const app = express();
 const uuid = require('uuid');
 
-const broadcast = require('./routes/broadcast');
+//const broadcast = require('./routes/broadcast');
 //const webviews = require('./routes/webviews');
 
 const userService = require('./services/user-service');
@@ -88,12 +88,12 @@ passport.use(new FacebookStrategy({
 
 app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'public_profile'}));
 
-app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/broadcast/broadcast',
-  failureRedirect: '/broadcast'
-}));
-
-app.set('view engine', 'ejs');
+// app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+//   successRedirect: '/broadcast/broadcast',
+//   failureRedirect: '/broadcast'
+// }));
+//
+// app.set('view engine', 'ejs');
 
 const credentials = {
   client_email: config.GOOGLE_CLIENT_EMAIL,
@@ -109,7 +109,7 @@ app.get('/', function(req, res) {
   res.send('Hello world, I am a chat bot')
 })
 
-app.use('/broadcast', broadcast);
+//app.use('/broadcast', broadcast);
 //app.use('/webviews', webviews);
 
 // for Facebook verification
