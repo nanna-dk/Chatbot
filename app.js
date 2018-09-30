@@ -409,9 +409,6 @@ function receivedPostback(event) {
         fbService.sendButtonMessage(senderID, "Læs mere om penge.", buttons);
       }, 3000)
       break;
-    case 'input.welcome': // Default welcome action - use this case only for Facebook
-      greetUserText(senderID);
-      break;
     case 'JOB_APPLY':
       //get feedback with new jobs
       dialogflowService.sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'JOB_OPENINGS');
