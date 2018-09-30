@@ -415,7 +415,7 @@ function receivedPostback(event) {
       break;
     default:
       //unindentified payload
-      fbService.sendTextMessage(senderID, "");
+      fbService.sendTextMessage(senderID, "Hvad kan jeg hjælpe med?");
       break;
   }
 
