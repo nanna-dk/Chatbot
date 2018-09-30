@@ -10,7 +10,7 @@ const app = express();
 const uuid = require('uuid');
 
 const broadcast = require('./routes/broadcast');
-const webviews = require('./routes/webviews');
+//const webviews = require('./routes/webviews');
 
 const userService = require('./services/user-service');
 let dialogflowService = require('./services/dialogflow-service');
