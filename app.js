@@ -8,8 +8,6 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 const uuid = require('uuid');
-const pg = require('pg');
-pg.defaults.ssl = true;
 
 const broadcast = require('./routes/broadcast');
 const webviews = require('./routes/webviews');
@@ -46,18 +44,6 @@ if (!config.FB_APP_SECRET) {
 }
 if (!config.SERVER_URL) { //used for ink to static files
 	throw new Error('missing SERVER_URL');
-}
-// if (!config.SENGRID_API_KEY) { //sending email
-//     throw new Error('missing SENGRID_API_KEY');
-// }
-// if (!config.EMAIL_FROM) { //sending email
-//     throw new Error('missing EMAIL_FROM');
-// }
-// if (!config.EMAIL_TO) { //sending email
-//     throw new Error('missing EMAIL_TO');
-// }
-if (!config.PG_CONFIG) { //pg config
-    throw new Error('missing PG_CONFIG');
 }
 if (!config.ADMIN_ID) { //admin id for login
     throw new Error('missing ADMIN_ID');
@@ -120,11 +106,7 @@ app.get('/auth/facebook', passport.authenticate('facebook',{scope:'public_profil
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { successRedirect : '/broadcast/broadcast', failureRedirect: '/broadcast' }));
 
-
-
 app.set('view engine', 'ejs');
-
-
 
 const credentials = {
     client_email: config.GOOGLE_CLIENT_EMAIL,
@@ -138,7 +120,6 @@ const sessionClient = new dialogflow.SessionsClient(
 	}
 );
 
-
 const sessionIds = new Map();
 const usersMap = new Map();
 
@@ -149,8 +130,6 @@ app.get('/', function (req, res) {
 
 app.use('/broadcast', broadcast);
 app.use('/webviews', webviews);
-
-
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
@@ -208,7 +187,6 @@ app.post('/webhook/', function (req, res) {
 	}
 });
 
-
 function setSessionAndUser(senderID) {
     if (!sessionIds.has(senderID)) {
         sessionIds.set(senderID, uuid.v1());
@@ -220,7 +198,6 @@ function setSessionAndUser(senderID) {
         }, senderID);
     }
 }
-
 
 function receivedMessage(event) {
 
@@ -317,41 +294,6 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 						fbService.sendButtonMessage(sender, "Hvilken slags hund mener du?", buttons);
 				}, 3000)
 				break;
-        // case "unsubscribe":
-        //     userService.newsletterSettings(function(updated) {
-        //         if (updated) {
-        //             fbService.sendTextMessage(sender, "You're unsubscribed. You can always subscribe back!");
-        //         } else {
-        //             fbService.sendTextMessage(sender, "Newsletter is not available at this moment." +
-        //                 "Try again later!");
-        //         }
-        //     }, 0, sender);
-        //     break;
-        // case "buy.iphone":
-        //     colors.readUserColor(function(color) {
-        //             let reply;
-        //             if (color === '') {
-        //                 reply = 'In what color would you like to have it?';
-        //             } else {
-        //                 reply = `Would you like to order it in your favourite color ${color}?`;
-        //             }
-        //         fbService.sendTextMessage(sender, reply);
-				//
-        //         }, sender
-        //     )
-        //     break;
-        // case "iphone_colors.fovourite":
-        //     colors.updateUserColor(parameters.fields['color'].stringValue, sender);
-        //     let reply = `Oh, I like it, too. I'll remember that.`;
-        //     fbService.sendTextMessage(sender, reply);
-        //     break;
-        // case "iphone_colors":
-        //     colors.readAllColors(function (allColors) {
-        //         let allColorsString = allColors.join(', ');
-        //         let reply = `IPhone xxx is available in ${allColorsString}. What is your favourite color?`;
-        //         fbService.sendTextMessage(sender, reply);
-        //     });
-        //     break;
         case "faq-delivery":
             fbService.handleMessages(messages, sender);
 

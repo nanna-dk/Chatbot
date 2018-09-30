@@ -14,7 +14,6 @@ const sessionClient = new dialogflow.SessionsClient({
   credentials
 });
 
-
 module.exports = {
   async sendTextQueryToDialogFlow(sessionIds, handleDialogFlowResponse, sender, text, params = {}) {
     const sessionPath = sessionClient.sessionPath(config.GOOGLE_PROJECT_ID, sessionIds.get(sender));
@@ -39,7 +38,6 @@ module.exports = {
     handleDialogFlowResponse(sender, result);
   },
 
-
   async sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, sender, event, params = {}) {
     const sessionPath = sessionClient.sessionPath(config.GOOGLE_PROJECT_ID, sessionIds.get(sender));
     const request = {
@@ -53,11 +51,8 @@ module.exports = {
       }
     };
 
-
     const responses = await sessionClient.detectIntent(request);
-
     const result = responses[0].queryResult;
     handleDialogFlowResponse(sender, result);
-
   }
 }
