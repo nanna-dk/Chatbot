@@ -418,13 +418,11 @@ function receivedPostback(event) {
       break;
     default:
       //unindentified payload
-      fbService.sendTextMessage(senderID, "Jeg er ikke sikker på at jeg forstår. Prøv lige igen.");
+      fbService.sendTextMessage(senderID, ":-)");
       break;
-
   }
 
-  console.log("Received postback for user %d and page %d with payload '%s' " + "at %d", senderID, recipientID, payload, timeOfPostback);
-
+  console.log("Received postback for user %d and page %d:-) with payload '%s' " + "at %d", senderID, recipientID, payload, timeOfPostback);
 }
 
 // Spin up the server
