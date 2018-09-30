@@ -415,8 +415,7 @@ function receivedPostback(event) {
       break;
     default:
       //unindentified payload
-      //fbService.sendTextMessage(senderID, ":-)");
-      greetUserText(senderID);
+      fbService.sendTextMessage(senderID, "");
       break;
   }
 
