@@ -42,10 +42,10 @@ if (!config.GOOGLE_PRIVATE_KEY) {
 if (!config.FB_APP_SECRET) {
   throw new Error('missing FB_APP_SECRET');
 }
-if (!config.SERVER_URL) { //used for ink to static files
+if (!config.SERVER_URL) { //used for link to static files
   throw new Error('missing SERVER_URL');
 }
-if (!config.ADMIN_ID) { //admin id for login
+if (!config.ADMIN_ID) { //admin id for facebook login
   throw new Error('missing ADMIN_ID');
 }
 
@@ -110,7 +110,7 @@ app.get('/', function(req, res) {
 })
 
 app.use('/broadcast', broadcast);
-app.use('/webviews', webviews);
+//app.use('/webviews', webviews);
 
 // for Facebook verification
 app.get('/webhook/', function(req, res) {
