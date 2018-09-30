@@ -11,10 +11,10 @@ module.exports = {
       qs: {
         access_token: config.FB_PAGE_TOKEN
       }
-    }
-    // , function(error, response, body) {
-    //   if (!error && response.statusCode == 200) {
-    //     var user = JSON.parse(body);
+
+    }, function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var user = JSON.parse(body);
         // if (user.first_name.length > 0) {
         //   var pool = new pg.Pool(config.PG_CONFIG);
         //   pool.connect(function(err, client, done) {
@@ -52,10 +52,10 @@ module.exports = {
         //   console.log("Cannot get data for fb user with id",
         //     userId);
         // }
-    //   } else {
-    //     console.error(response.error);
-    //   }
-    // });
+      } else {
+        console.error(response.error);
+      }
+    });
   }
 
 };
