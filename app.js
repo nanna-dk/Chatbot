@@ -384,7 +384,7 @@ function receivedPostback(event) {
 
   switch (payload) {
     case 'ANSWER_ONE':
-      //fbService.sendTextMessage(senderID, "Kæledyr forbudt!");
+      //fbService.sendTextMessage(senderID, "Some text...");
       setTimeout(function() {
         let buttons = [
           {
@@ -397,7 +397,7 @@ function receivedPostback(event) {
       }, 3000)
       break;
     case 'ANSWER_TWO':
-      //fbService.sendTextMessage(senderID, "Ingen penge!");
+      //fbService.sendTextMessage(senderID, "Some text...");
       setTimeout(function() {
         let buttons = [
           {
