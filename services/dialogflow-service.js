@@ -6,12 +6,11 @@ const structjson = require('./structjson.js');
 
 const credentials = {
   client_email: config.GOOGLE_CLIENT_EMAIL,
-  private_key: config.GOOGLE_PRIVATE_KEY,
+  private_key: config.GOOGLE_PRIVATE_KEY
 };
 
 const sessionClient = new dialogflow.SessionsClient({
-  projectId: config.GOOGLE_PROJECT_ID,
-  credentials
+  projectId: config.GOOGLE_PROJECT_ID, credentials
 });
 
 module.exports = {
@@ -24,8 +23,8 @@ module.exports = {
       queryInput: {
         text: {
           text: text,
-          languageCode: config.DF_LANGUAGE_CODE,
-        },
+          languageCode: config.DF_LANGUAGE_CODE
+        }
       },
       queryParams: {
         payload: {
@@ -46,8 +45,8 @@ module.exports = {
         event: {
           name: event,
           parameters: structjson.jsonToStructProto(params), //Dialogflow's v2 API uses gRPC. You'll need a jsonToStructProto method to convert your JavaScript object to a proto struct.
-          languageCode: config.DF_LANGUAGE_CODE,
-        },
+          languageCode: config.DF_LANGUAGE_CODE
+        }
       }
     };
 
