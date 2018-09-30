@@ -361,7 +361,7 @@ async function greetUserText(userId) {
     await resolveAfterXSeconds(2);
     user = usersMap.get(userId);
   }
-  fbService.sendTextMessage(userId, "Hej " + user.name + '! ' + 'Jeg kan svare på det meste - hvad kan jeg hjælpe dig med?');
+  fbService.sendTextMessage(userId, "Hej " + user.first_name + '! ' + 'Jeg kan svare på det meste - hvad kan jeg hjælpe dig med?');
 }
 
 /*
