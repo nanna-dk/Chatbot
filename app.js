@@ -15,7 +15,7 @@ const broadcast = require('./routes/broadcast');
 const webviews = require('./routes/webviews');
 
 const userService = require('./services/user-service');
-const colors = require('./colors');
+//const colors = require('./colors');
 //const jobApplicationService = require('./services/job-application-service');
 let dialogflowService = require('./services/dialogflow-service');
 const fbService = require('./services/fb-service');
@@ -332,31 +332,31 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                 }
             }, 0, sender);
             break;
-        case "buy.iphone":
-            colors.readUserColor(function(color) {
-                    let reply;
-                    if (color === '') {
-                        reply = 'In what color would you like to have it?';
-                    } else {
-                        reply = `Would you like to order it in your favourite color ${color}?`;
-                    }
-                fbService.sendTextMessage(sender, reply);
-
-                }, sender
-            )
-            break;
-        case "iphone_colors.fovourite":
-            colors.updateUserColor(parameters.fields['color'].stringValue, sender);
-            let reply = `Oh, I like it, too. I'll remember that.`;
-            fbService.sendTextMessage(sender, reply);
-            break;
-        case "iphone_colors":
-            colors.readAllColors(function (allColors) {
-                let allColorsString = allColors.join(', ');
-                let reply = `IPhone xxx is available in ${allColorsString}. What is your favourite color?`;
-                fbService.sendTextMessage(sender, reply);
-            });
-            break;
+        // case "buy.iphone":
+        //     colors.readUserColor(function(color) {
+        //             let reply;
+        //             if (color === '') {
+        //                 reply = 'In what color would you like to have it?';
+        //             } else {
+        //                 reply = `Would you like to order it in your favourite color ${color}?`;
+        //             }
+        //         fbService.sendTextMessage(sender, reply);
+				//
+        //         }, sender
+        //     )
+        //     break;
+        // case "iphone_colors.fovourite":
+        //     colors.updateUserColor(parameters.fields['color'].stringValue, sender);
+        //     let reply = `Oh, I like it, too. I'll remember that.`;
+        //     fbService.sendTextMessage(sender, reply);
+        //     break;
+        // case "iphone_colors":
+        //     colors.readAllColors(function (allColors) {
+        //         let allColorsString = allColors.join(', ');
+        //         let reply = `IPhone xxx is available in ${allColorsString}. What is your favourite color?`;
+        //         fbService.sendTextMessage(sender, reply);
+        //     });
+        //     break;
         case "faq-delivery":
             fbService.handleMessages(messages, sender);
 
