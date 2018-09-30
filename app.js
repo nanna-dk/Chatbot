@@ -378,7 +378,6 @@ function handleDialogFlowResponse(sender, response) {
 	}
 }
 
-
 async function resolveAfterXSeconds(x) {
     return new Promise(resolve => {
         setTimeout(() => {
@@ -393,7 +392,7 @@ async function greetUserText(userId) {
         await resolveAfterXSeconds(2);
         user = usersMap.get(userId);
     }
-    fbService.sendTextMessage(userId, "Welcome " + user.first_name + '! ' +
+    fbService.sendTextMessage(userId, "Welcome " + user.name + '! ' +
         'I can answer frequently asked questions for you ' +
         'and I perform job interviews. What can I help you with?');
 }
@@ -431,7 +430,7 @@ function receivedPostback(event) {
 				}, 3000)
 				break;
 				case 'ANSWER_TWO':
-//fbService.sendTextMessage(senderID, "Ingen penge!");
+				//fbService.sendTextMessage(senderID, "Ingen penge!");
 				setTimeout(function() {
 						let buttons = [
 								{
