@@ -409,7 +409,7 @@ function receivedPostback(event) {
         fbService.sendButtonMessage(senderID, "Læs mere om penge.", buttons);
       }, 3000)
       break;
-    case 'GET_STARTED':
+    case 'input.welcome': // Default welcome action - use this case only for Facebook
       greetUserText(senderID);
       break;
     case 'JOB_APPLY':
@@ -418,7 +418,7 @@ function receivedPostback(event) {
       break;
     default:
       //unindentified payload
-      fbService.sendTextMessage(senderID, "Hej. Jeg er en ægte chatbot. Hvad kan jeg hjælpe med?");
+      fbService.sendTextMessage(senderID, "Jeg er ikke sikker på at jeg forstår. Prøv lige igen.");
       break;
 
   }
