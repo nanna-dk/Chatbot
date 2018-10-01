@@ -98,9 +98,6 @@ app.get('/', function(req, res) {
   res.send('Hello world, I am a chat bot');
 });
 
-//app.use('/broadcast', broadcast);
-//app.use('/webviews', webviews);
-
 // for Facebook verification
 app.get('/webhook/', function(req, res) {
   console.log("request");
@@ -174,7 +171,6 @@ function receivedMessage(event) {
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
-
   setSessionAndUser(senderID);
 
   //console.log("Received message for user %d and page %d at %d with message:", senderID, recipientID, timeOfMessage);
@@ -310,7 +306,6 @@ function handleDialogFlowResponse(sender, response) {
   let action = response.action;
   let contexts = response.outputContexts;
   let parameters = response.parameters;
-
   fbService.sendTypingOff(sender);
 
   if (fbService.isDefined(action)) {
@@ -353,13 +348,11 @@ function receivedPostback(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
-
   setSessionAndUser(senderID);
 
   // The 'payload' param is a developer-defined field which is set in a postback
   // button for Structured Messages.
   var payload = event.postback.payload;
-
   switch (payload) {
     case 'ANSWER_ONE':
       //fbService.sendTextMessage(senderID, "Some text...");
