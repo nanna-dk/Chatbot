@@ -8,10 +8,6 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 const uuid = require('uuid');
-
-//const broadcast = require('./routes/broadcast');
-//const webviews = require('./routes/webviews');
-
 const userService = require('./services/user-service');
 let dialogflowService = require('./services/dialogflow-service');
 const fbService = require('./services/fb-service');
@@ -87,13 +83,6 @@ passport.use(new FacebookStrategy({
 }));
 
 app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'public_profile'}));
-
-// app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-//   successRedirect: '/broadcast/broadcast',
-//   failureRedirect: '/broadcast'
-// }));
-//
-// app.set('view engine', 'ejs');
 
 const credentials = {
   client_email: config.GOOGLE_CLIENT_EMAIL,
