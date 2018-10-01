@@ -1,3 +1,1 @@
-# Initial code for Udemy course [ChatBots: Messenger ChatBot - DialogFlow and nodejs](https://www.udemy.com/chatbots/?couponCode=GITHUB)
-
-
+# Creating a chatbot with Google Dialogflow for facebook Messenger - using Heroku and node.js
