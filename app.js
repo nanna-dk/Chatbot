@@ -45,7 +45,7 @@ if (!config.ADMIN_ID) { //admin id for facebook login
   throw new Error('missing ADMIN_ID');
 }
 
-app.set('port', (process.env.PORT || 5000))
+app.set('port', (process.env.PORT || 5000));
 
 //verify request came from facebook
 app.use(bodyParser.json({verify: fbService.verifyRequestSignature}));
@@ -95,8 +95,8 @@ const usersMap = new Map();
 
 // Index route
 app.get('/', function(req, res) {
-  res.send('Hello world, I am a chat bot')
-})
+  res.send('Hello world, I am a chat bot');
+});
 
 //app.use('/broadcast', broadcast);
 //app.use('/webviews', webviews);
@@ -110,7 +110,7 @@ app.get('/webhook/', function(req, res) {
     console.error("Failed validation. Make sure the validation tokens match.");
     res.sendStatus(403);
   }
-})
+});
 
 /*
  * All callbacks for Messenger are POST-ed. They will be sent to the same
@@ -209,17 +209,6 @@ function receivedMessage(event) {
 function handleQuickReply(senderID, quickReply, messageId) {
   var quickReplyPayload = quickReply.payload;
   switch (quickReplyPayload) {
-      // case 'NEWS_PER_WEEK':
-      //     userService.newsletterSettings(function (updated) {
-      //         if (updated) {
-      //             fbService.sendTextMessage(senderID, "Thank you for subscribing!" +
-      //                 "If you want to usubscribe just write 'unsubscribe from newsletter'");
-      //         } else {
-      //             fbService.sendTextMessage(senderID, "Newsletter is not available at this moment." +
-      //                 "Try again later!");
-      //         }
-      //     }, 1, senderID);
-      //     break;
       // case 'NEWS_PER_DAY':
       //     userService.newsletterSettings(function (updated) {
       //         if (updated) {
@@ -257,7 +246,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
           }
         ];
         fbService.sendButtonMessage(sender, "Hvilken slags hund mener du?", buttons);
-      }, 3000)
+      }, 3000);
       break;
     case "faq-delivery":
       fbService.handleMessages(messages, sender);
@@ -278,7 +267,7 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
         ];
 
         fbService.sendButtonMessage(sender, "What would you like to do next?", buttons);
-      }, 3000)
+      }, 3000);
       break;
     default:
       //unhandled action, just send back the text
@@ -383,7 +372,7 @@ function receivedPostback(event) {
           }
         ];
         fbService.sendButtonMessage(senderID, "Læs mere om hunden.", buttons);
-      }, 3000)
+      }, 3000);
       break;
     case 'ANSWER_TWO':
       //fbService.sendTextMessage(senderID, "Some text...");
@@ -396,7 +385,7 @@ function receivedPostback(event) {
           }
         ];
         fbService.sendButtonMessage(senderID, "Læs mere om penge.", buttons);
-      }, 3000)
+      }, 3000);
       break;
     case 'JOB_APPLY':
       //get feedback with new jobs
@@ -413,5 +402,5 @@ function receivedPostback(event) {
 
 // Spin up the server
 app.listen(app.get('port'), function() {
-  console.log('running on port', app.get('port'))
-})
+  console.log('running on port', app.get('port'));
+});

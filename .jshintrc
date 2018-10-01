@@ -1,0 +1,13 @@
+{
+  "node": true,
+  "globals": {
+    "$": false,
+    "jQuery": true,
+    "grecaptcha": true,
+    "gtag": true,
+    "self": true,
+    "caches": true
+  },
+  "browser": true,
+  "esversion": 6
+}
